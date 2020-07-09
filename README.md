@@ -29,4 +29,4 @@
 
 ### More info about SPA with Flask/Vuejs ?
 
-Check out the [post](https://testdriven.io/developing-a-single-page-app-with-flask-and-vuejs).
+Check out this good [post](https://testdriven.io/developing-a-single-page-app-with-flask-and-vuejs).
