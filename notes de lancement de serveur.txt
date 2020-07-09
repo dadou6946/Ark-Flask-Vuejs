@@ -1,0 +1,11 @@
+aller dans client
+
+npm run serve
+
+Aller dans server / env-flask-vue / Scripts
+
+activate
+
+revenir dans server
+
+py app.py
