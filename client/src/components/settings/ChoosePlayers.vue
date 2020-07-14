@@ -117,16 +117,15 @@ export default {
 </script>
 
 <style>
-        .btn {
-            border-radius: 5px;
-            margin: 2px;
-            /*color: white;
-            background-color: teal;*/
-        }
-        .selected {
-            border: 3px solid lightgreen;
-            -webkit-box-shadow: -3px -2px 5px 0px lightgreen;
-            -moz-box-shadow: -3px -2px 5px 0px lightgreen;
-            box-shadow: -3px -2px 5px 0px lightgreen;        }
-
+  .btn {
+      border-radius: 5px;
+      margin: 2px;
+      /*color: white;
+      background-color: teal;*/
+  }
+  .selected {
+      border: 3px solid lightgreen;
+      -webkit-box-shadow: -3px -2px 5px 0px lightgreen;
+      -moz-box-shadow: -3px -2px 5px 0px lightgreen;
+      box-shadow: -3px -2px 5px 0px lightgreen;        }
 </style>

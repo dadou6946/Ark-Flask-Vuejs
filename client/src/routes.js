@@ -1,25 +1,25 @@
 // Settings
-import Home from './components/settings/Home';
-import ChoosePlayers from './components/settings/ChoosePlayers';
-import ChooseCharacters from './components/settings/ChooseCharacters';
-import MixAllyPackage from './components/settings/MixAllyPackage';
-import MixInvestigatorPackage from './components/settings/MixInvestigatorPackage';
-import ChooseAncient from './components/settings/ChooseAncient';
-import SetClues from './components/settings/SetClues';
-import SetFixedObjects from './components/settings/SetFixedObjects';
-import SetRandomObjects from './components/settings/SetRandomObjects';
-import SetHealthSanity from './components/settings/SetHealthSanity';
-import SetProperties from './components/settings/SetProperties';
-import SetUpMonsters from './components/settings/SetUpMonsters';
-import MixAncientPackage from './components/settings/MixAncientPackage';
-import PlaceInvestigators from './components/settings/PlaceInvestigators';
+import Home from './components/settings/Home.vue';
+import ChoosePlayers from './components/settings/ChoosePlayers.vue';
+import ChooseCharacters from './components/settings/ChooseCharacters.vue';
+import MixAllyPackage from './components/settings/MixAllyPackage.vue';
+import MixInvestigatorPackage from './components/settings/MixInvestigatorPackage.vue';
+import ChooseAncient from './components/settings/ChooseAncient.vue';
+import SetClues from './components/settings/SetClues.vue';
+import SetFixedObjects from './components/settings/SetFixedObjects.vue';
+import SetRandomObjects from './components/settings/SetRandomObjects.vue';
+import SetHealthSanity from './components/settings/SetHealthSanity.vue';
+import SetProperties from './components/settings/SetProperties.vue';
+import SetUpMonsters from './components/settings/SetUpMonsters.vue';
+import MixAncientPackage from './components/settings/MixAncientPackage.vue';
+import PlaceInvestigators from './components/settings/PlaceInvestigators.vue';
 
 // Phases de tours
-import MythStep from './components/mythStep/MythStep';
-import UpkeepStep from './components/upkeepStep/UpkeepStep';
-import MoveStep from './components/moveStep/MoveStep';
-import ArkhamEncounterStep from './components/arkhamEncounterStep/ArkhamEncounterStep';
-import BeyondEncounterStep from './components/beyondEncounterStep/BeyondEncounterStep';
+import MythStep from './components/mythStep/MythStep.vue';
+import UpkeepStep from './components/upkeepStep/UpkeepStep.vue';
+import MoveStep from './components/moveStep/MoveStep.vue';
+import ArkhamEncounterStep from './components/arkhamEncounterStep/ArkhamEncounterStep.vue';
+import BeyondEncounterStep from './components/beyondEncounterStep/BeyondEncounterStep.vue';
 
 const Routes = [
   {
