@@ -4,167 +4,138 @@ session = {
     },
     'historique': {
         'dernier': '', # mix-ally-package
-        'etapes': [''], # 'choose-characters', 'choose-players', 'mix-ally-package'
+        'etapes': [], # 'choose-characters', 'choose-players', 'mix-ally-package'
     },
     'investigateurs':{
-        '1': {
-            'nom': 'Joe Diamonds',
-            'joueur':'sylvain',
-            'statut': 'ok',
-            'lieu': {
-                'actuel': {
-                    'nom': 'Administration',
-                    'id': 17
-                },
-                'maison': {
-                    'nom': 'Poste de police',
-                    'id': 9
-                }
-            },
-            'resistance': {
-                'actuelle':7,
-                'max':7
-            },
-            'santeMentale': {
-                'actuelle':3,
-                'max':3
-            },
-            'competences': {        
-                'vitesse': 1,
-                'discretion': 3,
-                'vigueur': 4,
-                'volonté': 2,
-                'savoir': 1,
-                'chance': 3,
-            },
-            'possessions':[
-                {
-                    'id': 2,
-                    'nom': "hache",
-                    'propriétaire': 1,
-                    'paquet': "commun",
-                    'status': True, #utilisable si true, false si objet déchargé
-                    'cost': 5,
-                    'image': "hache.jpg",
-                    'type': 'arme', #(utilisable, arme, sort, tome, consommable),
-                    'hand': 1,
-                    'texte': "Arme physique<br>+4 aux tests de Combat",
-                    'modificateur':
-                    {
-                        'typeDegat': "magique",
-                        'aptitude': "combat",
-                        'valeur': +1,
-                        'valeurAlternative': +4,
-                        'conditionAlternative': "1 main libre",
-                    },
-                    'action':
-                    {
-                        'nom': "decharger", # destroy
-                        'quand': "mouvement",
-                        'gainValeur ': 2,
-                        'gainType': "mouvement",
-                    },
-                    'passif':
-                    {
-                        'valeurPassif': +1,
-                        'aptitudePassif': "test d'horreur",
-                    }
-                }
-            ]
-        },
-        '2': {
-            'nom': 'Jenny Barnes',
-            'joueur':'Lena',
-            'statut': 'ok',
-            'lieu': {
-                'actuel': {
-                    'nom': 'Journa:l',
-                    'id': 2
-                },
-                'maison': {
-                    'nom': 'Gare',
-                    'id': 3
-                }
-            },
-            'resistance': {
-                'actuelle':3,
-                'max':3
-            },
-            'santeMentale': {
-                'actuelle':7,
-                'max':7
-            },
-            'competences': {        
-                'vitesse': 1,
-                'discretion': 3,
-                'vigueur': 4,
-                'volonté': 2,
-                'savoir': 1,
-                'chance': 3,
-            },
-            'possessions':[]
-        },
+        # Exemple d'investigqteur avec des donnees
+        # '1': {
+        #     'nom': 'Joe Diamonds',
+        #     'joueur':'sylvain',
+        #     'statut': 'ok',
+        #     'lieu': {
+        #         'actuel': {
+        #             'nom': 'Administration',
+        #             'id': 17
+        #         },
+        #         'maison': {
+        #             'nom': 'Poste de police',
+        #             'id': 9
+        #         }
+        #     },
+        #     'resistance': {
+        #         'actuelle':7,
+        #         'max':7
+        #     },
+        #     'santeMentale': {
+        #         'actuelle':3,
+        #         'max':3
+        #     },
+        #     'competences': {        
+        #         'vitesse': 1,
+        #         'discretion': 3,
+        #         'vigueur': 4,
+        #         'volonté': 2,
+        #         'savoir': 1,
+        #         'chance': 3,
+        #     },
+        #     'possessions':[
+        #         {
+        #             'id': 2,
+        #             'nom': "hache",
+        #             'propriétaire': 1,
+        #             'paquet': "commun",
+        #             'status': True, #utilisable si true, false si objet déchargé
+        #             'cost': 5,
+        #             'image': "hache.jpg",
+        #             'type': 'arme', #(utilisable, arme, sort, tome, consommable),
+        #             'hand': 1,
+        #             'texte': "Arme physique<br>+4 aux tests de Combat",
+        #             'modificateur':
+        #             {
+        #                 'typeDegat': "magique",
+        #                 'aptitude': "combat",
+        #                 'valeur': +1,
+        #                 'valeurAlternative': +4,
+        #                 'conditionAlternative': "1 main libre",
+        #             },
+        #             'action':
+        #             {
+        #                 'nom': "decharger", # destroy
+        #                 'quand': "mouvement",
+        #                 'gainValeur ': 2,
+        #                 'gainType': "mouvement",
+        #             },
+        #             'passif':
+        #             {
+        #                 'valeurPassif': +1,
+        #                 'aptitudePassif': "test d'horreur",
+        #             }
+        #         }
+        #     ]
+        # },
     },
     'monstres': [
-        {
-            'nom': 'Vampire',
-            'conscience': -3,
-            'mouvement': 'normal',
-            'symbole': 'lune',
-            'capacites': [
-                'mort-vivant',
-                'résistance physique'
-            ],
-            'texteAmbiance': 'C\était une bête dans la tombe. Il tendait ses mains vers nous et retroussait ses lèvres, atiré par le sang dans nos veines.',
-            'horreur': {
-                'valeur': +0,
-                'degat': 2
-            },
-            'force': 2,
-            'combat': {
-                'valeur': -3, 
-                'degat': 3
-            }
-        }
+        # Exemple de montre
+        # {
+        #     'nom': 'Vampire',
+        #     'conscience': -3,
+        #     'mouvement': 'normal',
+        #     'symbole': 'lune',
+        #     'capacites': [
+        #         'mort-vivant',
+        #         'résistance physique'
+        #     ],
+        #     'texteAmbiance': 'C\était une bête dans la tombe. Il tendait ses mains vers nous et retroussait ses lèvres, atiré par le sang dans nos veines.',
+        #     'horreur': {
+        #         'valeur': +0,
+        #         'degat': 2
+        #     },
+        #     'force': 2,
+        #     'combat': {
+        #         'valeur': -3, 
+        #         'degat': 3
+        #     }
+        # }
     ],
     'ancien': {
-        'nom': 'Yig',
-        'valeurCombat': -3,
-        'capaciteDefensive': 'aucun',
-        'adorateurs': {
-            'texte': 'Les adorateurs de Yig sont en réalité des membres du Peuple Serpent déguisés. Leur morsure est très venimeuse. Les Cultistes ont une valeur de combat de +0 et des dégâts de combat de 4 résistances.',
-            'passif': 
-            {
-                'cible': 'cultiste',
-                'effets': [
-                {
-                    'cle':'combat',
-                    'valeur': +0,
-                },
-                {   
-                    'cle': 'degats',
-                    'valeur': 4
-                }
-                ] 
-            }
-        },
-        'pouvoirs':[
-            {
-                'titre': 'La colère de Yig',
-                'texte': 'Tant que Yig est plongé dans son sommeil, il gagne un pion destin quand un cultiste est battu ou quand un investigateur est perdu dans le temps et l\'espace.'
-            },
-            {
-                'titre': 'Début de bataille',
-                'texte': 'Chaque investigateur est Maudit. Un investigateur qui est déjà Maudit est dévoré.'
-            }
-        ],
-        'attaque': {
-            'texte': 'Chaque investigateur doit réussir un test de Vitesse (+1) ou perdre 1 Santé Mentale et 1 Résistance. Le modificateur de test diminue de 1 à chaque tour (+0 au deuxième tour, -1 au troisième, etc.)'
-        },
-        'echelleDestin': {
-            'actuelle': 0,
-            'max': 10
-        }
+        # Exemple d'ancien
+        # 'nom': 'Yig',
+        # 'valeurCombat': -3,
+        # 'capaciteDefensive': 'aucun',
+        # 'adorateurs': {
+        #     'texte': 'Les adorateurs de Yig sont en réalité des membres du Peuple Serpent déguisés. Leur morsure est très venimeuse. Les Cultistes ont une valeur de combat de +0 et des dégâts de combat de 4 résistances.',
+        #     'passif': 
+        #     {
+        #         'cible': 'cultiste',
+        #         'effets': [
+        #         {
+        #             'cle':'combat',
+        #             'valeur': +0,
+        #         },
+        #         {   
+        #             'cle': 'degats',
+        #             'valeur': 4
+        #         }
+        #         ] 
+        #     }
+        # },
+        # 'pouvoirs':[
+        #     {
+        #         'titre': 'La colère de Yig',
+        #         'texte': 'Tant que Yig est plongé dans son sommeil, il gagne un pion destin quand un cultiste est battu ou quand un investigateur est perdu dans le temps et l\'espace.'
+        #     },
+        #     {
+        #         'titre': 'Début de bataille',
+        #         'texte': 'Chaque investigateur est Maudit. Un investigateur qui est déjà Maudit est dévoré.'
+        #     }
+        # ],
+        # 'attaque': {
+        #     'texte': 'Chaque investigateur doit réussir un test de Vitesse (+1) ou perdre 1 Santé Mentale et 1 Résistance. Le modificateur de test diminue de 1 à chaque tour (+0 au deuxième tour, -1 au troisième, etc.)'
+        # },
+        # 'echelleDestin': {
+        #     'actuelle': 0,
+        #     'max': 10
+        # }
     },
     'objetsDisponibles': {
         'allies': [], # avoir une liste MELANGEE de 11 id d'allies => 1,2,3,4,5,6,7,8,9,10,11

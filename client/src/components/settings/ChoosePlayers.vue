@@ -80,14 +80,15 @@ export default {
       // Envoi des données au serveur
       // Diriger vers le nouveau composant
       self = this;
-      // Exemple de requete avec axios
-      axios.get('https://api.themoviedb.org/3/movie/550?api_key=cbf431d660a6bb41316b07a07bbd9da6')
+      // Requete avec axios pour enregistrer les données
+      axios.post('http://127.0.0.1:5000/envoiDonnees/' + 'choose-players', {
+        nombreJoueur: this.playerNumber,
+        joueurs: this.players,
+      })
         .then((response) => {
-          // handle success
-          self.keptData = response.data.original_title;
-          console.log(self.keptData);
+          console.log(response.data.response_object)
           // Redirige vers home ou prochain composant
-          self.$router.push('/choose-characters');
+          // self.$router.push('/choose-characters');
         })
         .catch((error) => {
           // handle error
@@ -108,10 +109,13 @@ export default {
     if (cpt == 0) this.allowConfirm = true;
   },
   mounted() {
-    axios.get('http://127.0.0.1:5000/check/'+ 'choose-players')
-        .then((response) => {
-          console.log(response.data)
-        });
+    axios.post('http://127.0.0.1:5000/checker/'+ 'choose-players', {
+      nombreJoueur: 1, // donnes pour tester le passage de parametres
+      joueur1: '',
+    })
+      .then((response) => {
+        // console.log(response.data)
+      });
   },
 };
 </script>

@@ -1,10 +1,10 @@
 from app import app
 import uuid
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS
 from pprint import pprint as pp
 
-from donnees import session
+from sessionManager import *
 from historiqueManager import *
 
 # configuration
@@ -14,26 +14,48 @@ app.config.from_object(__name__)
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-@app.route('/check/<nomEtape>', methods=['GET'])
+# Manager de session
+sm = SessionManager()
+
+@app.route('/checker/<nomEtape>', methods=['POST'])
 def check(nomEtape):
-    return jsonify(VerifierHistorique(nomEtape))
+    pp(request.get_json())
+    if verifierHistorique(nomEtape, sm) == True:
+        response_object = { 'deja': True }
+        data = sm.trouverDonneesSession()
+    else:
+        response_object = { 'deja': False }
+    return make_response(jsonify(response_object), 200)
+
+@app.route('/envoiDonnees/<nomEtape>', methods=['POST'])
+def envoiDonnees(nomEtape):
+    pp(request.get_json())
+    ajouterEtape(nomEtape, sm)
+    # pp(sm.session)
+    return jsonify(response_object = { 'statut': True, 'donnees': sm.session})
+
+
+
+
+
+
 
 @app.route('/test1', methods=['GET'])
 def test1():
-    return jsonify(session)
+    return jsonify(sm.session)
 
 @app.route('/test2', methods=['GET'])
 def test2():
     session['monstre'] = 'Chthonien'
-    return jsonify(session)
+    return jsonify(sm.session)
 
 # TEST DE MODIFICATION DES DONNEES ET RECUPERATION
 # session.get('investigateurs').get('1').get('competences')["vitesse"] = session.get('investigateurs').get('1').get('competences')["vitesse"] + 1
 # pp(session.get('investigateurs').get('1').get('competences'))
 # pp('ajouter lolo')
-# pp(AjouterEtape('lolo'))
+# pp(ajouterEtape('lolo'))
 # pp('ajouter toto')
-# pp(AjouterEtape('toto'))
+# pp(ajouterEtape('toto'))
 # pp(pp(session.get('historique').get('etapes')))
     
 # EXEMPLES D'UTILISATION
