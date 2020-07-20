@@ -1,4 +1,5 @@
 from app import app
+
 import uuid
 from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS
@@ -10,12 +11,12 @@ from historiqueManager import *
 # configuration
 DEBUG = True
 app.config.from_object(__name__)
+# Manager de session
+sm = SessionManager()
 
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-# Manager de session
-sm = SessionManager()
 
 @app.route('/checker/<nomEtape>', methods=['POST'])
 def check(nomEtape):

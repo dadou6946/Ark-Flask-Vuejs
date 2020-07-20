@@ -17,7 +17,7 @@ def verifierHistorique(nomEtape, managerDeSession):
 def ajouterEtape(nomEtape, managerDeSession):
     hist = managerDeSession.session.get('historique').get('etapes')
     if(nomEtape not in hist):
-        managerDeSession.session.get('historique').get('etapes').append(nomEtape)
+        hist.append(nomEtape)
         return True
     else:
         return False

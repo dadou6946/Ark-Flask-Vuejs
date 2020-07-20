@@ -1,5 +1,5 @@
 from donnees import *
-
+from pprint import pprint as pp
 class SessionManager:
     """"""
 
@@ -7,8 +7,20 @@ class SessionManager:
         """"""
         self.session = session
 
-    def trouverDonneesSession(nom:str):
+    def trouverDonneesSession(self,path:list):
         """"""
+        donnees = self.session
+        for step in path:
+            donnees = donnees.get(step)
+        return donnees
+
+    def modifierDonneesSession(self,path:list,value:any):
+        """"""
+        donnees = self.session
+        for step in path[:-1]:
+            donnees = donnees[step]
+        donnees[path[-1]] = value
         return True
+
 
     
