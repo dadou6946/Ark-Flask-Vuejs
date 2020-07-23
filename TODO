@@ -1,6 +1,5 @@
 Utiliser response_object pour les toutes les réponses
 
-
 Voir a gérer l'enregistrement et la récupération de donnees dans la session
     Avoir des helpers
     Avoir des cas particuliers si besoin mais pas trop
@@ -11,3 +10,8 @@ Pour le moment pour l'étape 'choose-players', a la soumission du formulaire, on
 Manque : 
 - modifier la session avec les données envoyées
 - s'occuper du check de la session a l'arrivée sur le composant 'choose-players'
+
+
+copier un dict :
+d = { 'key': value }
+f = d.copy()

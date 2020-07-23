@@ -7,6 +7,7 @@ from pprint import pprint as pp
 
 from sessionManager import *
 from historiqueManager import *
+from donnees import _investigateur_, _monstre_, _objet_, _ancien_
 
 # configuration
 DEBUG = True
@@ -16,24 +17,49 @@ sm = SessionManager()
 
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
-
+# pp(sm.trouverDonneesSession(['historique']))
+# path = ["historique","etapes"]
+# test = sm.modifierDonneesSession(path, 'toto')
 
 @app.route('/checker/<nomEtape>', methods=['POST'])
 def check(nomEtape):
-    pp(request.get_json())
     if verifierHistorique(nomEtape, sm) == True:
         response_object = { 'deja': True }
-        data = sm.trouverDonneesSession()
     else:
         response_object = { 'deja': False }
-    return make_response(jsonify(response_object), 200)
+
+    # page du choix du nombre de joueurs et leurs nom 
+    if nomEtape == 'choose-players':
+        if verifierHistorique(nomEtape, sm) == True:
+            # on récupère le nombre de joueurs et les noms des joueurs si on les a deja enregistré
+            response_object['nombreJoueurs'] = sm.trouverDonneesSession(['partie','nombreJoueurs'])
+            investigateurs = sm.trouverDonneesSession(['investigateurs'])
+            joueurs = []
+            for inv in investigateurs.values():
+                joueurs.append(inv.get('joueur'))
+            response_object['joueurs'] = joueurs
+
+    # retour de données
+    return jsonify(response_object)
 
 @app.route('/envoiDonnees/<nomEtape>', methods=['POST'])
 def envoiDonnees(nomEtape):
-    pp(request.get_json())
+    data = request.get_json()
     ajouterEtape(nomEtape, sm)
-    # pp(sm.session)
-    return jsonify(response_object = { 'statut': True, 'donnees': sm.session})
+    # page du choix du nombre de joueurs et leurs nom 
+    if nomEtape == 'choose-players':
+        # maj nombre de joueur
+        sm.modifierDonneesSession(['partie','nombreJoueurs'], data.get('nombreJoueur'))
+        # creation des investigateurs avec le modèle _investigateur_
+        cpt = 1
+        for joueur in data.get('joueurs'):
+            inv = _investigateur_.copy()
+            inv['joueur'] = joueur.get('name')
+            sm.modifierDonneesSession(['investigateurs', str(cpt)], inv, False)
+            cpt = cpt + 1
+
+    response_object = { 'statut': True, 'donnees': sm.session}
+    return jsonify(response_object)
 
 
 
@@ -41,14 +67,6 @@ def envoiDonnees(nomEtape):
 
 
 
-@app.route('/test1', methods=['GET'])
-def test1():
-    return jsonify(sm.session)
-
-@app.route('/test2', methods=['GET'])
-def test2():
-    session['monstre'] = 'Chthonien'
-    return jsonify(sm.session)
 
 # TEST DE MODIFICATION DES DONNEES ET RECUPERATION
 # session.get('investigateurs').get('1').get('competences')["vitesse"] = session.get('investigateurs').get('1').get('competences')["vitesse"] + 1

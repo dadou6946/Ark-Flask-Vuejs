@@ -33,8 +33,6 @@
 
         </div>
 
-        <a @click="test1" class="btn">Test 1</a>
-
     </div>
 </template>
 
@@ -70,12 +68,6 @@ export default {
         this.players.splice(this.playerNumber, 1);
       }
     },
-    test1() {
-      axios.get('http://127.0.0.1:5000/test1')
-        .then((response) => {
-          console.log(response.data)
-        });
-    },
     submit() {
       // Envoi des données au serveur
       // Diriger vers le nouveau composant
@@ -86,17 +78,13 @@ export default {
         joueurs: this.players,
       })
         .then((response) => {
-          console.log(response.data.response_object)
           // Redirige vers home ou prochain composant
-          // self.$router.push('/choose-characters');
+          self.$router.push('/choose-characters');
         })
         .catch((error) => {
           // handle error
           console.log(error);
         })
-        .then(() => {
-          // always executed
-        });
     },
 
 
@@ -109,12 +97,20 @@ export default {
     if (cpt == 0) this.allowConfirm = true;
   },
   mounted() {
+    // vérification de données
     axios.post('http://127.0.0.1:5000/checker/'+ 'choose-players', {
       nombreJoueur: 1, // donnes pour tester le passage de parametres
       joueur1: '',
     })
       .then((response) => {
-        // console.log(response.data)
+        // récupération du nombre de joueurs et des noms des joueurs si on est deja passé sur cette page
+        if (response.data.deja === true) {
+          this.playerNumber = Number(response.data.nombreJoueurs);
+          this.players = [];
+          response.data.joueurs.forEach((joueur) => {
+            this.players.push({ name: joueur });
+          });
+        }
       });
   },
 };

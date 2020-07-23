@@ -12,12 +12,6 @@
                   <div class="waves-effect waves-light btn" disabled>Continuer une partie</div>
                 </div>
 
-                <div>
-                  <!-- Boutons de test de methodes -->
-                  <a @click="test1" class="btn">Test 1</a>
-                  <a @click="test2" class="btn">Test 2</a>
-                </div>
-
             </div>
         </div>
     </div>
@@ -32,20 +26,5 @@ export default {
       pageTitle: 'Accueil',
     };
   },
-  methods: {
-    // methodes de test
-    test1() {
-      axios.get('http://127.0.0.1:5000/test1')
-        .then((response) => {
-          console.log(response.data)
-        });
-    },
-    test2() {
-      axios.get('http://127.0.0.1:5000/test2')
-        .then((response) => {
-          console.log(response.data)
-        });
-    },
-  }
 };
 </script>

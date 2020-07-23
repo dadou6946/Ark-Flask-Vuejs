@@ -1,6 +1,6 @@
 session = {
     'partie': {
-        'nombreJoueurs':2,
+        'nombreJoueurs': '',
     },
     'historique': {
         'dernier': '', # mix-ally-package
