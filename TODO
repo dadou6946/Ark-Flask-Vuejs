@@ -1,16 +1,11 @@
-Utiliser response_object pour les toutes les réponses
-
 Voir a gérer l'enregistrement et la récupération de donnees dans la session
-    Avoir des helpers
+    Avoir des fonctions de récupération : ok
+    Avoir des helpers (récupérer le joueur 1, l'ancien, ...)
     Avoir des cas particuliers si besoin mais pas trop
 
-Pour le moment pour l'étape 'choose-players', a la soumission du formulaire, on a :
-- ajouté le nom de l'étape dans l'historique 
-
-Manque : 
-- modifier la session avec les données envoyées
-- s'occuper du check de la session a l'arrivée sur le composant 'choose-players'
-
+Pour choose-players on a :
+- a l'arrivée sur le component, on vérifie si on est déja passé dessus, et si oui on récupère les données enregistrées lors du passage précédent
+- a la soumission, on enregistre les données et on met a jour l'historique avant de passer au component suivant
 
 copier un dict :
 d = { 'key': value }

@@ -73,6 +73,9 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -123,8 +126,8 @@ export default {
             name: player.name,
           });
           player.disabled = 'disabled';
-          if (this.current < this.playerNumber) this.current++;
-          else if (this.current == this.playerNumber) {
+          if (this.current < this.playerNumber) this.current += 1;
+          else if (this.current === this.playerNumber) {
             this.enableSubmit = true;
             this.available.forEach((character) => {
               character.disabled = 'disabled';
@@ -160,6 +163,24 @@ export default {
   updated() {
     this.recapMessage = this.playerNumber == 1 ? 'Le joueur 1 a été choisi. Vous pouvez le réattribuer ou passer à l\'étape suivante.'
       : 'Les joueurs ont été choisis. Vous pouvez les réattribuer ou passer à l\'étape suivante.';
+  },
+  mounted() {
+    // vérification de données
+    axios.post('http://127.0.0.1:5000/checker/choose-characters', {
+      // nombreJoueur: 1, // donnes pour tester le passage de parametres
+      // joueur1: '',
+    })
+      .then((response) => {
+        // récupération du nombre de joueurs et des noms des joueurs si on est deja passé sur cette page
+        console.log(response.data)
+        if (response.data.deja === true) {
+          // this.playerNumber = Number(response.data.nombreJoueurs);
+          // this.players = [];
+          // response.data.joueurs.forEach((joueur) => {
+            // this.players.push({ name: joueur });
+          // });
+        }
+      });
   },
   computed: {
 

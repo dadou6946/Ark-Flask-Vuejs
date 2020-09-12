@@ -18,6 +18,13 @@ class SessionManager:
             donnees = donnees.get(step)
         return donnees
 
+
+    def trouverInvestivateur(self, numero:int=-1):
+        if numero == -1:
+            return self.trouverDonneesSession(['investigateurs'])
+        else:
+            return self.trouverDonneesSession(['investigateurs', numero])
+
     def modifierDonneesSession(self,path:list,value:any,append:bool=False):
         """
         Modifie les donnes de session

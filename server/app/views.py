@@ -23,14 +23,12 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 @app.route('/checker/<nomEtape>', methods=['POST'])
 def check(nomEtape):
-    if verifierHistorique(nomEtape, sm) == True:
-        response_object = { 'deja': True }
-    else:
-        response_object = { 'deja': False }
+    verification = verifierHistorique(nomEtape, sm)
 
     # page du choix du nombre de joueurs et leurs nom 
-    if nomEtape == 'choose-players':
-        if verifierHistorique(nomEtape, sm) == True:
+    if verification == True:
+        response_object = { 'deja': True }
+        if nomEtape == 'choose-players':
             # on récupère le nombre de joueurs et les noms des joueurs si on les a deja enregistré
             response_object['nombreJoueurs'] = sm.trouverDonneesSession(['partie','nombreJoueurs'])
             investigateurs = sm.trouverDonneesSession(['investigateurs'])
@@ -38,13 +36,20 @@ def check(nomEtape):
             for inv in investigateurs.values():
                 joueurs.append(inv.get('joueur'))
             response_object['joueurs'] = joueurs
+    else:
+        response_object = { 'deja': False }
+    
+    if nomEtape == 'choose-characters':
+        pp(sm.trouverInvestivateur())
 
     # retour de données
     return jsonify(response_object)
 
 @app.route('/envoiDonnees/<nomEtape>', methods=['POST'])
 def envoiDonnees(nomEtape):
+    # Récupération des données envoyées
     data = request.get_json()
+    # Ajout de l'étape dans l'historique
     ajouterEtape(nomEtape, sm)
     # page du choix du nombre de joueurs et leurs nom 
     if nomEtape == 'choose-players':

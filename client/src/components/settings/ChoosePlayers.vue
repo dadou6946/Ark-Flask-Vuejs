@@ -79,6 +79,7 @@ export default {
       })
         .then((response) => {
           // Redirige vers home ou prochain composant
+          // console.log(response);
           self.$router.push('/choose-characters');
         })
         .catch((error) => {
@@ -92,13 +93,13 @@ export default {
   updated() {
     let cpt = 0;
     this.players.forEach((player) => {
-      if (player.name == '') cpt++;
+      if (player.name === '') cpt += 1;
     });
-    if (cpt == 0) this.allowConfirm = true;
+    if (cpt === 0) this.allowConfirm = true;
   },
   mounted() {
     // vérification de données
-    axios.post('http://127.0.0.1:5000/checker/'+ 'choose-players', {
+    axios.post('http://127.0.0.1:5000/checker/choose-players', {
       nombreJoueur: 1, // donnes pour tester le passage de parametres
       joueur1: '',
     })
