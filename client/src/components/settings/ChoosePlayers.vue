@@ -87,8 +87,6 @@ export default {
           console.log(error);
         })
     },
-
-
   },
   updated() {
     let cpt = 0;
@@ -99,10 +97,7 @@ export default {
   },
   mounted() {
     // vérification de données
-    axios.post('http://127.0.0.1:5000/checker/choose-players', {
-      nombreJoueur: 1, // donnes pour tester le passage de parametres
-      joueur1: '',
-    })
+    axios.post('http://127.0.0.1:5000/checker/choose-players', {})
       .then((response) => {
         // récupération du nombre de joueurs et des noms des joueurs si on est deja passé sur cette page
         if (response.data.deja === true) {

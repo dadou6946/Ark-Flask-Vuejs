@@ -28,7 +28,11 @@ def check(nomEtape):
     # page du choix du nombre de joueurs et leurs nom 
     if verification == True:
         response_object = { 'deja': True }
-        if nomEtape == 'choose-players':
+    else:
+        response_object = { 'deja': False }
+
+    if nomEtape == 'choose-players':
+        if verification == True:
             # on récupère le nombre de joueurs et les noms des joueurs si on les a deja enregistré
             response_object['nombreJoueurs'] = sm.trouverDonneesSession(['partie','nombreJoueurs'])
             investigateurs = sm.trouverDonneesSession(['investigateurs'])
@@ -36,11 +40,17 @@ def check(nomEtape):
             for inv in investigateurs.values():
                 joueurs.append(inv.get('joueur'))
             response_object['joueurs'] = joueurs
-    else:
-        response_object = { 'deja': False }
-    
-    if nomEtape == 'choose-characters':
-        pp(sm.trouverInvestivateur())
+        
+    if nomEtape == 'choose-characters':        
+        if verification == True:
+            # On récupère les noms des investigateurs et le nombre de joueurs
+            donnees = []
+            investigateurs = sm.trouverDonneesSession(['investigateurs'])
+            # pp(investigateurs)
+            for inv in investigateurs.values():
+                donnees.append(inv.get('nom'))
+            response_object['investigateurs'] = donnees
+        response_object['nombreJoueurs'] = sm.trouverDonneesSession(['partie','nombreJoueurs'])
 
     # retour de données
     return jsonify(response_object)
@@ -49,8 +59,10 @@ def check(nomEtape):
 def envoiDonnees(nomEtape):
     # Récupération des données envoyées
     data = request.get_json()
+    pp(data)
     # Ajout de l'étape dans l'historique
     ajouterEtape(nomEtape, sm)
+
     # page du choix du nombre de joueurs et leurs nom 
     if nomEtape == 'choose-players':
         # maj nombre de joueur
@@ -62,8 +74,11 @@ def envoiDonnees(nomEtape):
             inv['joueur'] = joueur.get('name')
             sm.modifierDonneesSession(['investigateurs', str(cpt)], inv, False)
             cpt = cpt + 1
-
+    if nomEtape == 'choose-characters':
+        for investigator in data.get('investigators'):
+            sm.modifierDonneesSession(['investigateurs', str(investigator.get('player')), 'nom'], investigator.get('name'))
     response_object = { 'statut': True, 'donnees': sm.session}
+
     return jsonify(response_object)
 
 

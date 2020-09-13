@@ -33,7 +33,7 @@
                         {{ player.name }}
                     </button>
                     <br><br>
-                    <button class="btn" :disabled="!enableSubmit" @click="continueAction">Confirmer</button>
+                    <button class="btn" :disabled="!enableSubmit" @click="submit">Confirmer</button>
                     <button class="btn" @click="reboot">Réattribuer les personnages</button>
                 </div>
 
@@ -128,10 +128,7 @@ export default {
           player.disabled = 'disabled';
           if (this.current < this.playerNumber) this.current += 1;
           else if (this.current === this.playerNumber) {
-            this.enableSubmit = true;
-            this.available.forEach((character) => {
-              character.disabled = 'disabled';
-            });
+            this.allowSubmitButtons();
           }
         }
       }
@@ -149,41 +146,53 @@ export default {
       this.hovered = true;
       this.imagePath = `/image/sheet/character/${name.replace(' ', '')}.jpg`;
     },
+    allowSubmitButtons() {
+      this.enableSubmit = true;
+      this.available.forEach((character) => {
+        character.disabled = 'disabled';
+      });
+    },
     submit() {
-      // Envoi des données au server
+      // Envoi des données au serveur
       // Diriger vers le nouveau composant
+      self = this;
+      // Requete avec axios pour enregistrer les données
+      axios.post('http://127.0.0.1:5000/envoiDonnees/' + 'choose-characters', {
+        investigators: this.investigators,
+      })
+        .then((response) => {
+          // Redirige vers le prochain composant
+          console.log(response);
+          this.$router.push('mix-ally-package');
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        })
     },
-    continueAction() {
-      // console.log('ici')
-      this.$router.push('mix-ally-package');
-    },
-
-
   },
   updated() {
     this.recapMessage = this.playerNumber == 1 ? 'Le joueur 1 a été choisi. Vous pouvez le réattribuer ou passer à l\'étape suivante.'
       : 'Les joueurs ont été choisis. Vous pouvez les réattribuer ou passer à l\'étape suivante.';
   },
-  mounted() {
+mounted() {
     // vérification de données
-    axios.post('http://127.0.0.1:5000/checker/choose-characters', {
-      // nombreJoueur: 1, // donnes pour tester le passage de parametres
-      // joueur1: '',
-    })
+    axios.post('http://127.0.0.1:5000/checker/choose-characters', {})
       .then((response) => {
         // récupération du nombre de joueurs et des noms des joueurs si on est deja passé sur cette page
-        console.log(response.data)
+        // console.log(response.data)
         if (response.data.deja === true) {
-          // this.playerNumber = Number(response.data.nombreJoueurs);
-          // this.players = [];
-          // response.data.joueurs.forEach((joueur) => {
-            // this.players.push({ name: joueur });
-          // });
+          var cpt = 1;
+          response.data.investigateurs.forEach((inv) => {
+            this.investigators.push({ name: inv, player: cpt });
+            cpt += 1;
+          });
+          this.allowSubmitButtons();
         }
+        this.playerNumber = response.data.nombreJoueurs;
       });
   },
   computed: {
-
   },
 };
 </script>
